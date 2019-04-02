@@ -4,9 +4,9 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace ApplicationScreening.Domain.Entities.QuestionAggregate
+namespace ApplicationScreening.Domain.Entities.ApplicationQuestionAggregate
 {
-    public class ApplicationQuestion : Entity<string>
+    public class ApplicationQuestion : Entity<Guid>
     {
         public string Question { get; private set; }
         public Answer Answer { get; private set; }

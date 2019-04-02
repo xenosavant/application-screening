@@ -3,7 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace ApplicationScreening.Domain.Entities.QuestionAggregate
+namespace ApplicationScreening.Domain.Entities.ApplicationQuestionAggregate
 {
     public class Answer: ValueObject
     {

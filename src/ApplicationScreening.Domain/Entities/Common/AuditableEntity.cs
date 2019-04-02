@@ -6,7 +6,7 @@ using System.Text;
 namespace ApplicationScreening.Domain.Common
 {
     // This class represents an entity that is auditable and implements the IAuditable interface
-    class AuditableEntity<T> : IAuditable<T>
+    public class AuditableEntity<T> : Entity<T>, IAuditable<T>
     {
         private DateTime? _createdDate;
 

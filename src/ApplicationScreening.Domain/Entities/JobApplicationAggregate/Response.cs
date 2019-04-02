@@ -1,9 +1,9 @@
-﻿using ApplicationScreening.Domain.Entities.QuestionAggregate;
+﻿using ApplicationScreening.Domain.Entities.ApplicationQuestionAggregate;
 using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace ApplicationScreening.Domain.Entities.ApplicationAggregate
+namespace ApplicationScreening.Domain.Entities.JobApplicationAggregate
 {
     public class Response
     {
