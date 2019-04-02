@@ -3,7 +3,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.28307.329
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ApplicationScreening", "ApplicationScreening\ApplicationScreening.csproj", "{42A48058-18F6-411D-9828-F99238C1592D}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ApplicationScreening.Web", "src\ApplicationScreening.Web\ApplicationScreening.Web.csproj", "{42A48058-18F6-411D-9828-F99238C1592D}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ApplicationScreening.Api", "src\ApplicationScreening.Api\ApplicationScreening.Api.csproj", "{7485E3DA-DFE2-4FCF-A45A-E5829CCE87BA}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,11 +17,18 @@ Global
 		{42A48058-18F6-411D-9828-F99238C1592D}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{42A48058-18F6-411D-9828-F99238C1592D}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{42A48058-18F6-411D-9828-F99238C1592D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7485E3DA-DFE2-4FCF-A45A-E5829CCE87BA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7485E3DA-DFE2-4FCF-A45A-E5829CCE87BA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7485E3DA-DFE2-4FCF-A45A-E5829CCE87BA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7485E3DA-DFE2-4FCF-A45A-E5829CCE87BA}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {E6B0D785-5283-4A51-95D2-E2F07A47176A}
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{7485E3DA-DFE2-4FCF-A45A-E5829CCE87BA} = {5B521CBE-5143-4349-AF85-6B73884F789A}
 	EndGlobalSection
 EndGlobal
