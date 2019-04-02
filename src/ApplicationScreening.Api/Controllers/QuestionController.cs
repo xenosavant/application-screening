@@ -7,7 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 namespace ApplicationScreening.Controllers
 {
     [Route("api/[controller]")]
-    public class SampleDataController : Controller
+    public class QuestionController : Microsoft.AspNetCore.Mvc.Controller
     {
         private static string[] Summaries = new[]
         {
