@@ -56,5 +56,13 @@ namespace ApplicationScreening.Controllers
             await _repository.SaveAsync();
             return NoContent();
         }
+
+        [HttpGet]
+        [ProducesResponseType(200)]
+        [ProducesResponseType(400)]
+        public async Task<ActionResult<List<JobApplication>>> Get()
+        {
+            return await _repository.GetList();
+        }
     }
 }

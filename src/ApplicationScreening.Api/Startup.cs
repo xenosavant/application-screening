@@ -16,6 +16,7 @@ using ApplicationScreening.Domain.Entities.JobApplicationAggregate;
 using ApplicationScreening.Domain.Entities.ApplicationQuestionAggregate;
 using ApplicationScreening.Domain.Interfaces;
 using ApplicationScreening.Domain.Services;
+using AutoMapper;
 
 namespace ApplicationScreening.Api
 {
@@ -45,6 +46,9 @@ namespace ApplicationScreening.Api
                 services.AddDbContext<AppDbContext>(options =>
                     options.UseSqlServer(Configuration["ConnectionStrings:DefaultConnection"]));
             }
+
+            services.AddAutoMapper();
+            Mapper.AssertConfigurationIsValid();
 
             services.AddScoped<IJobApplicationRepository, JobApplicationRepository>();
             services.AddScoped<IApplicationQuestionRepository, ApplicationQuestionRepository>();
