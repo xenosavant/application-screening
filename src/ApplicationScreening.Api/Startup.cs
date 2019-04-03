@@ -45,7 +45,7 @@ namespace ApplicationScreening.Api
             else
             {
                 services.AddDbContext<AppDbContext>(options =>
-                    options.UseSqlServer(Configuration["ConnectionStrings:DefaultConnection"]));
+                    options.UseSqlServer("Server=tcp:application-screening-server.database.windows.net,1433;Initial Catalog=application-screening;Persist Security Info=False;User ID=user;Password=Pa$$word;MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30;"));
             }
 
             services.AddAutoMapper();
@@ -62,12 +62,7 @@ namespace ApplicationScreening.Api
             {
                 app.UseDeveloperExceptionPage();
             }
-            else
-            {
-                app.UseHsts();
-            }
 
-            app.UseHttpsRedirection();
             app.UseMvc();
         }
     }

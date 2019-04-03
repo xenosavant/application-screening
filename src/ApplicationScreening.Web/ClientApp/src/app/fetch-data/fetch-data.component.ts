@@ -1,24 +1,23 @@
-import { Component, Inject } from '@angular/core';
+import { Component, Inject, Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
+import { Observable } from 'rxjs';
+import { Question } from '../models/question.model';
+import { Application } from '../models/application.model';
 
-@Component({
-  selector: 'app-fetch-data',
-  templateUrl: './fetch-data.component.html'
-})
+@Injectable({ providedIn: 'root' })
 export class FetchDataComponent {
-  public forecasts: WeatherForecast[];
 
-  constructor(http: HttpClient, @Inject('BASE_URL') baseUrl: string) {
-    console.log(baseUrl + 'api/SampleData/WeatherForecasts');
-    http.get<WeatherForecast[]>(baseUrl + 'api/SampleData/WeatherForecasts').subscribe(result => {
-      this.forecasts = result;
-    }, error => console.error(error));
+  constructor(private http: HttpClient, @Inject('BASE_URL') private baseUrl: string) { }
+
+  public getQuestions(): Observable<Question[]> {
+    return this.http.get<Question[]>(this.baseUrl + 'api/question');
   }
-}
 
-interface WeatherForecast {
-  dateFormatted: string;
-  temperatureC: number;
-  temperatureF: number;
-  summary: string;
+  public getApplications(): Observable<Application[]> {
+    return this.http.get<Application[]>(this.baseUrl + 'api/application');
+  }
+
+  public postQuestion(question: Question): Observable<Question> {
+    return this.http.post<Question>((this.baseUrl + 'api/question'), question);
+  }
 }

@@ -1,0 +1,37 @@
+<h1>Questions</h1>
+<div class="wrapper">
+  <table class="table group">
+    <thead>
+      <tr>
+        <th class="col-md-4">Id</th>
+        <th class="col-md-4">Question</th>
+        <th class="col-md-4">Answer</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let question of questions">
+        <td class="col-md-4">{{question.id}}</td>
+        <td class="col-md-4">{{question.question}}</td>
+        <td class="col-md-4">{{question.answer}}</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <div class="group" [formGroup]="form">
+    <div class="row">
+      <div class="col-xs-12 col-sm-2 col-md-2 col-lg-2">
+        <button (click)="onSubmit()" [ngClass]="{ 'disabled' : !form.valid }" type="submit" class="btn btn-eg">
+          Add Question</button>
+      </div>
+      <div class="col-xs-12 col-sm-5 col-md-5 col-lg-5">
+        <div class="form-group">
+          <input type="text" class="form-control" formControlName="question" placeholder="Question">
+        </div>
+      </div>
+      <div class="col-xs-12 col-sm-5 col-md-5 col-lg-5">
+        <div class="form-group">
+          <input type="text" class="form-control" formControlName="answer" placeholder="Answer">
+        </div>
+      </div>
+    </div>
+  </div>

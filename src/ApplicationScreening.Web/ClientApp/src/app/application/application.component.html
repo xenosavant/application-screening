@@ -1,0 +1,20 @@
+<h1>Applications</h1>
+<div class="wrapper">
+  <div *ngFor="let application of applications">
+    <h3>{{application.name}}</h3>
+    <table class="table group">
+      <thead>
+        <tr>
+          <th class="col-md-4">Question</th>
+          <th class="col-md-4">Answer</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let response of application.responses">
+          <td class="col-md-4">{{response.question}}</td>
+          <td class="col-md-4">{{response.answer}}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

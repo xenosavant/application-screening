@@ -1,4 +1,4 @@
 export const environment = {
   production: true,
-  baseUrl: 'http://application-screening-api.azurewebsites.net/'
+  baseUrl: 'https://application-screening-api.azurewebsites.net/'
 };

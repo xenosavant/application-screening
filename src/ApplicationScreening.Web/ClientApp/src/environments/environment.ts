@@ -5,5 +5,5 @@
 
 export const environment = {
   production: false,
-  baseUrl: 'http://localhost:44321/'
+  baseUrl: 'http://application-screening-api.azurewebsites.net/'
 };
