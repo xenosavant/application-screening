@@ -10,7 +10,7 @@ namespace ApplicationScreening.Api.Mapping
         {
             CreateMap<ApplicationQuestion, ApplicationQuestionDto>()
                 .ForMember(dest => dest.Question, opts => opts.MapFrom(src => src.Question))
-                .ForMember(dest => dest.Answer, opts => opts.MapFrom(src => src.Answer))
+                .ForMember(dest => dest.Answer, opts => opts.MapFrom(src => src.Answer.Value))
                 .ForMember(dest => dest.Id, opts => opts.MapFrom(src => src.Id))
                 .ForAllOtherMembers(x => x.Ignore());
         }

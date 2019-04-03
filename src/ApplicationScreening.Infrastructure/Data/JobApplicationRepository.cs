@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using ApplicationScreening.Domain.Entities.JobApplicationAggregate;
@@ -22,9 +23,19 @@ namespace ApplicationScreening.Infrastructure.Data
             throw new NotImplementedException();
         }
 
-        public Task<List<JobApplication>> GetList(List<IFilter<JobApplication>> filters = null)
+        public async Task<List<JobApplication>> GetList(List<IFilter<JobApplication>> filters = null)
         {
-            throw new NotImplementedException();
+            IQueryable<JobApplication> query = _context.Set<JobApplication>();
+
+            if (filters != null)
+            {
+                foreach (var filter in filters)
+                {
+                    query = query.Where(filter.Criteria);
+                }
+            }
+            return await query.Include("Responses.Question")
+                .Include("Responses.Answer").ToListAsync();
         }
 
         public void Create(JobApplication entity)

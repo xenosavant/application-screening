@@ -11,6 +11,7 @@ namespace ApplicationScreening.Api.Dtos
     public class JobApplicationDto
     {
         public string Name { get; set; }
-        public List<ResponseDto> Questions { get; set; }
+        public List<ResponseDto> Responses { get; set; }
     }
+
 }

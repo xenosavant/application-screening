@@ -17,6 +17,7 @@ using ApplicationScreening.Domain.Entities.ApplicationQuestionAggregate;
 using ApplicationScreening.Domain.Interfaces;
 using ApplicationScreening.Domain.Services;
 using AutoMapper;
+using ApplicationScreening.Api.Mapping;
 
 namespace ApplicationScreening.Api
 {
@@ -48,7 +49,6 @@ namespace ApplicationScreening.Api
             }
 
             services.AddAutoMapper();
-            Mapper.AssertConfigurationIsValid();
 
             services.AddScoped<IJobApplicationRepository, JobApplicationRepository>();
             services.AddScoped<IApplicationQuestionRepository, ApplicationQuestionRepository>();

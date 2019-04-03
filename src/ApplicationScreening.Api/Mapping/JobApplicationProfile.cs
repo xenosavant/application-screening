@@ -11,7 +11,7 @@ namespace ApplicationScreening.Api.Mapping
         {
             CreateMap<JobApplication, JobApplicationDto>()
                 .ForMember(dest => dest.Name, opts => opts.MapFrom(src => src.Name))
-                .ForMember(dest => dest.Questions, opts => opts.MapFrom(src => src.Responses))
+                .ForMember(dest => dest.Responses, opts => opts.MapFrom(src => src.Responses))
                 .ForAllOtherMembers(x => x.Ignore());
 
             CreateMap<Response, ResponseDto>()

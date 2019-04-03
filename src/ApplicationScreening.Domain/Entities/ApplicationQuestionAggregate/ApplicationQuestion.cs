@@ -17,6 +17,7 @@ namespace ApplicationScreening.Domain.Entities.ApplicationQuestionAggregate
 
         public ApplicationQuestion(string question)
         {
+            _responses = new List<Response>();
             Question = question;
         }
 

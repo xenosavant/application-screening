@@ -8,6 +8,7 @@ using QuestionFilters = ApplicationScreening.Domain.Entities.ApplicationQuestion
 using ApplicationScreening.Domain.Entities.JobApplicationAggregate;
 using ApplicationScreening.Domain.Interfaces;
 using Microsoft.AspNetCore.Mvc;
+using AutoMapper;
 
 namespace ApplicationScreening.Controllers
 {
@@ -18,11 +19,15 @@ namespace ApplicationScreening.Controllers
         private readonly IJobApplicationRepository _repository;
         private readonly IApplicationQuestionRepository _questionsRepository;
         private readonly IApplicationService _applicationService;
+        private readonly IMapper _mapper;
 
         public ApplicationController(IJobApplicationRepository repository,
             IApplicationQuestionRepository questionsRepository,
-            IApplicationService applicationService)
+            IApplicationService applicationService,
+            IMapper mapper
+            )
         {
+            _mapper = mapper;
             _questionsRepository = questionsRepository;
             _repository = repository;
             _applicationService = applicationService;
@@ -31,7 +36,7 @@ namespace ApplicationScreening.Controllers
         [HttpPost]
         [ProducesResponseType(204)]
         [ProducesResponseType(400)]
-        public async Task<ActionResult> Post([FromBody] JobApplicationDto applicationDto)
+        public async Task<ActionResult> Post([FromBody] JobApplicationRequest applicationDto)
         {
             var application = new JobApplication(applicationDto.Name);
             var questionIds = new List<Guid>();
@@ -60,9 +65,9 @@ namespace ApplicationScreening.Controllers
         [HttpGet]
         [ProducesResponseType(200)]
         [ProducesResponseType(400)]
-        public async Task<ActionResult<List<JobApplication>>> Get()
+        public async Task<ActionResult<List<JobApplicationDto>>> Get()
         {
-            return await _repository.GetList();
+            return Ok(_mapper.Map<List<JobApplicationDto>>(await _repository.GetList()));
         }
     }
 }
