@@ -1,20 +1,22 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Threading.Tasks;
 
 namespace ApplicationScreening.Domain.Interfaces
 {
-    interface IRepository<T>
+    public interface IRepository<T> where T : class, IEntity
     {
-        TEntity GetById<TEntity>(object id)
-            where TEntity : class, IEntity;
+        Task<T> GetById(object id);
 
-        List<T> GetList(IFilter<T> filter = null);
+        Task<List<T>> GetList(List<IFilter<T>> filters = null);
 
-        void Update<TEntity>(TEntity entity, int? modifiedBy = null)
-            where TEntity : class, IEntity;
+        void Update(T entity);
 
-        void Delete<TEntity>(TEntity entity, int? modifiedBy = null)
-            where TEntity : class, IEntity;
+        void Create(T entity);
+
+        void Delete(T entity);
+
+        Task SaveAsync();
     }
 }

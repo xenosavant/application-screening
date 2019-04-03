@@ -5,7 +5,7 @@ using System.Text;
 
 namespace ApplicationScreening.Domain.Entities.ApplicationQuestionAggregate
 {
-    public class Answer: ValueObject
+    public class Answer: ValueObject<Answer>
     {
         public string Value { get; private set; }
 
@@ -14,19 +14,14 @@ namespace ApplicationScreening.Domain.Entities.ApplicationQuestionAggregate
             Value = value;
         }
 
-        public override bool Equals(ValueObject other)
+        public override bool Equals(Answer other)
         {
-            return string.Compare(this.Value.ToLower(), (other as Answer).Value.ToLower()) == 0;
+            return string.Compare(this.Value.ToLower(), other.Value.ToLower()) == 0;
         }
 
-        public override int GetHashCode(ValueObject other)
+        public override int GetHashCode(Answer other)
         {
             return Value.GetHashCode();
-        }
-
-        protected override IEnumerable<object> GetAtomicValues()
-        {
-            yield return Value;
         }
     }
 }

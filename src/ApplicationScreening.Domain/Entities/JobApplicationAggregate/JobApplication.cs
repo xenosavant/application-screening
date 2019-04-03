@@ -18,8 +18,10 @@ namespace ApplicationScreening.Domain.Entities.JobApplicationAggregate
             Name = name;
         }
 
-        public void AddResponse(Response response)
+        public void AddResponse(string questionId, string answer)
         {
+            var response = new Response(new Guid(questionId));
+            response.SetAnswer(answer);
             _responses.Add(response);
         }
     }

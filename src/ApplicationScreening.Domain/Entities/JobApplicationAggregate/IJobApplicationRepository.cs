@@ -6,7 +6,7 @@ using System.Text;
 
 namespace ApplicationScreening.Domain.Entities.JobApplicationAggregate
 {
-    interface IJobApplicationRepository : IRepository<JobApplication>
+    public interface IJobApplicationRepository : IRepository<JobApplication>
     {
 
     }

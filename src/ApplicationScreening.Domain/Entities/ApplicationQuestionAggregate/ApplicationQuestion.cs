@@ -1,4 +1,5 @@
 ﻿using ApplicationScreening.Domain.Common;
+using ApplicationScreening.Domain.Entities.JobApplicationAggregate;
 using ApplicationScreening.Domain.Interfaces;
 using System;
 using System.Collections.Generic;
@@ -11,10 +12,17 @@ namespace ApplicationScreening.Domain.Entities.ApplicationQuestionAggregate
         public string Question { get; private set; }
         public Answer Answer { get; private set; }
 
-        public ApplicationQuestion(string question, Answer answer )
+        private readonly List<Response> _responses;
+        public IReadOnlyCollection<Response> Responses => _responses;
+
+        public ApplicationQuestion(string question)
         {
             Question = question;
-            Answer = answer;
+        }
+
+        public void SetAnswer(string answer)
+        {
+            Answer = new Answer(answer);
         }
     }
 }

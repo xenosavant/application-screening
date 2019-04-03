@@ -5,7 +5,7 @@ using System.Text;
 
 namespace ApplicationScreening.Domain.Entities.ApplicationQuestionAggregate
 {
-    interface IApplicationQuestionRepository : IRepository<ApplicationQuestion>
+    public interface IApplicationQuestionRepository : IRepository<ApplicationQuestion>
     {
     }
 }

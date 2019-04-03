@@ -9,6 +9,5 @@ namespace ApplicationScreening.Domain.Interfaces
     {
         DateTime CreatedDate { get; set; }
         DateTime? ModifiedDate { get; set; }
-        T CreatedBy { get; set; }
     }
 }

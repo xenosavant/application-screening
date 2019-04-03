@@ -16,8 +16,6 @@ namespace ApplicationScreening.Domain.Common
             set => _createdDate = value;
         }
 
-        public T CreatedBy { get; set; }
-
         public DateTime? ModifiedDate { get; set; }
     }
 }

@@ -12,7 +12,9 @@ namespace ApplicationScreening.Infrastructure.Data.Configurations
     {
         public void Configure(EntityTypeBuilder<Response> builder)
         {
-            builder.HasOne<ApplicationQuestion>().WithMany().HasForeignKey("_questionId");
+            builder.HasKey(x => x.Id);
+            builder.Property(x => x.Id).HasDefaultValueSql("newid()");
+
             builder.OwnsOne(x => x.Answer);
         }
     }

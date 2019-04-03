@@ -2,43 +2,59 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using ApplicationScreening.Api.Dtos;
+using ApplicationScreening.Domain.Entities.ApplicationQuestionAggregate;
+using QuestionFilters = ApplicationScreening.Domain.Entities.ApplicationQuestionAggregate.ApplicationQuestionFilters;
+using ApplicationScreening.Domain.Entities.JobApplicationAggregate;
+using ApplicationScreening.Domain.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 
 namespace ApplicationScreening.Controllers
 {
+    [Produces("application/json")]
     [Route("api/[controller]")]
     public class ApplicationController : Microsoft.AspNetCore.Mvc.Controller
     {
-        private static string[] Summaries = new[]
-        {
-            "Freezing", "Bracing", "Chilly", "Cool", "Mild", "Warm", "Balmy", "Hot", "Sweltering", "Scorching"
-        };
+        private readonly IJobApplicationRepository _repository;
+        private readonly IApplicationQuestionRepository _questionsRepository;
+        private readonly IApplicationService _applicationService;
 
-        [HttpGet("[action]")]
-        public IEnumerable<WeatherForecast> WeatherForecasts()
+        public ApplicationController(IJobApplicationRepository repository,
+            IApplicationQuestionRepository questionsRepository,
+            IApplicationService applicationService)
         {
-            var rng = new Random();
-            return Enumerable.Range(1, 5).Select(index => new WeatherForecast
-            {
-                DateFormatted = DateTime.Now.AddDays(index).ToString("d"),
-                TemperatureC = rng.Next(-20, 55),
-                Summary = Summaries[rng.Next(Summaries.Length)]
-            });
+            _questionsRepository = questionsRepository;
+            _repository = repository;
+            _applicationService = applicationService;
         }
 
-        public class WeatherForecast
+        [HttpPost]
+        [ProducesResponseType(204)]
+        [ProducesResponseType(400)]
+        public async Task<ActionResult> Post([FromBody] JobApplicationDto applicationDto)
         {
-            public string DateFormatted { get; set; }
-            public int TemperatureC { get; set; }
-            public string Summary { get; set; }
-
-            public int TemperatureF
+            var application = new JobApplication(applicationDto.Name);
+            var questionIds = new List<Guid>();
+            foreach (var response in applicationDto.Questions)
             {
-                get
-                {
-                    return 32 + (int)(TemperatureC / 0.5556);
-                }
+                application.AddResponse(response.Id, response.Answer);
+                questionIds.Add(new Guid(response.Id));
             }
+            var filters = new List<IFilter<ApplicationQuestion>>()
+            {
+                new QuestionFilters.QuestionsWithIds(questionIds)
+            };
+            var answers = await _questionsRepository.GetList(filters);
+            if (answers.Count != applicationDto.Questions.Count)
+            {
+                return BadRequest();
+            }
+            if (_applicationService.VerifyApplication(application.Responses.ToList(), answers))
+            {
+                _repository.Create(application);
+            }
+            await _repository.SaveAsync();
+            return NoContent();
         }
     }
 }
